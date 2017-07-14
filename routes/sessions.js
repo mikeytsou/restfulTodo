@@ -1,8 +1,6 @@
 const express = require("express");
       router = express.Router();
       passport = require("passport");
-// MODELS
-      User = require("../models/user");
 
 // NEW
 router.get("/sessions", function(req, res) {
@@ -16,5 +14,12 @@ router.post("/sessions", passport.authenticate("local", {
   // successFlash: "Welcome to YelpCamp",
   // failureFlash: true
 }), function(req, res) {});
+
+// LOGOUT
+router.get("/logout", function(req, res) {
+  req.logout();
+  // flash message
+  res.redirect("/todos");
+})
 
 module.exports = router;

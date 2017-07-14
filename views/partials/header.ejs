@@ -17,9 +17,14 @@
       <a href="/todos" class="item">Home</a>
 
       <div class="right menu">
-        <a href="/users/new" class="ui item">Register</a>
-        <a href="/sessions" class="ui item">Sign In</a>
-        <a href="" class="ui item">Sign Out</a>
+        <% if (!currentUser) { -%>
+          <a href="/users/new" class="ui item">Register</a>
+          <a href="/sessions" class="ui item">Log In</a>
+        <% } else { -%>
+          <a href="" class="ui item"><%= currentUser.username %></a>
+          <a href="/logout" class="ui item">Log Out</a>
+
+        <% } -%>
       </div>
     </div>
   </div>
