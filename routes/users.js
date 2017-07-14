@@ -10,6 +10,6 @@ router.get("/users/new", function(req, res) {
 });
 
 // CREATE
-// router.post("")
+router.post("")
 
 module.exports = router;
