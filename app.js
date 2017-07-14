@@ -7,6 +7,8 @@ const express = require("express");
       passportLocalMongoose = require("passport-local-mongoose");
       methodOverride = require("method-override");
       flash = require("connect-flash");
+// ROUTES
+      indexRoutes = require("./routes/index");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/restful_todo");
@@ -15,7 +17,8 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.set("view engine", "ejs");
 
-
+// ROUTES
+app.use(indexRoutes);
 
 
 // MISSING ROUTE
