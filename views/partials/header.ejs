@@ -14,13 +14,17 @@
     <div class="ui container">
       <div class="header item">RESTful Todo</div>
 
-      <a href="" class="item">Home</a>
-
+      <a href="/todos" class="item">Home</a>
 
       <div class="right menu">
-        <a href="" class="ui item">Register</a>
-        <a href="" class="ui item">LogIn</a>
-        <a href="" class="ui item">LogOut</a>
+        <% if (!currentUser) { -%>
+          <a href="/users/new" class="ui item">Register</a>
+          <a href="/sessions" class="ui item">Log In</a>
+        <% } else { -%>
+          <a href="" class="ui item"><%= currentUser.username %></a>
+          <a href="/logout" class="ui item">Log Out</a>
+
+        <% } -%>
       </div>
     </div>
   </div>

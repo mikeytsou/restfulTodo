@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+
+<div class="ui main text container segment">
+  <form action="/sessions" method="POST" class="ui form">
+    <h1 class="ui huge header">Sign In</h1>
+
+    <div class="field">
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="username">
+    </div>
+
+    <div class="field">
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="password">
+    </div>
+
+    <input class="ui inverted green button" type="submit" >
+  </form>
+</div>
+
+<% include ../partials/footer %>
