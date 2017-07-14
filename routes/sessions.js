@@ -9,7 +9,7 @@ router.get("/sessions", function(req, res) {
 
 // CREATE
 router.post("/sessions", passport.authenticate("local", {
-  successRedirect: "/todos",
+  successRedirect: "/",
   failureRedirect: "/sessions",
   // successFlash: "Welcome to YelpCamp",
   // failureFlash: true
@@ -19,7 +19,7 @@ router.post("/sessions", passport.authenticate("local", {
 router.get("/logout", function(req, res) {
   req.logout();
   // flash message
-  res.redirect("/todos");
+  res.redirect("/");
 })
 
 module.exports = router;

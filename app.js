@@ -11,6 +11,7 @@ const express = require("express");
       indexRoutes = require("./routes/index");
       usersRoutes = require("./routes/users");
       sessionsRoutes = require("./routes/sessions");
+      todosRoutes = require("./routes/todos");
 
 
 // APP CONFIG
@@ -45,6 +46,7 @@ app.use(function(req, res, next) {
 app.use(indexRoutes);
 app.use(usersRoutes);
 app.use(sessionsRoutes);
+app.use(todosRoutes);
 
 
 // MISSING ROUTE

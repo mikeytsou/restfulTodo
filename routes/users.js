@@ -23,7 +23,7 @@ router.post("/users", function(req, res) {
       return res.render("users/new");
     }
     passport.authenticate("local")(req, res, function() {
-      res.redirect("/todos");
+      res.redirect("/");
     });
   });
 })
