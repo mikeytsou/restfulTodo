@@ -6,7 +6,8 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="/javascripts/script.js"></script>
   <title>RESTful Todo</title>
 </head>
 <body>
@@ -19,9 +20,8 @@
           <a href="/users/new" class="ui item">Register</a>
           <a href="/sessions" class="ui item">Log In</a>
         <% } else { -%>
-          <a href="/users/<%= currentUser.id %>" class="ui item"><%= currentUser.username %></a>
+          <a href="" class="ui item"><%= currentUser.username %></a>
           <a href="/logout" class="ui item">Log Out</a>
-
         <% } -%>
       </div>
     </div>

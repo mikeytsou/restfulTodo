@@ -11,14 +11,14 @@ router.get("/todos", function(req, res) {
 });
 
 // NEW
-router.get("/todos/new", function (req, res) {
+router.get("/todos/new", middleware.isLoggedIn, function (req, res) {
   console.log(req.user)
   res.render("todos/new");
 });
 
 // CREATE
-router.post("/todos", function(req, res) {
-  const post = req.body.todo.post;
+router.post("/todos", middleware.isLoggedIn, function(req, res) {
+  const post = req.body.post;
   const author = {
     id: req.user._id,
     username: req.user.username
@@ -32,13 +32,17 @@ router.post("/todos", function(req, res) {
       console.log(err);
     } else {
       console.log(newTodos);
-      res.redirect(`/users/${req.user.id}`);
+      if (req.xhr) {
+        res.json(newTodos);
+      } else {
+        res.redirect(`/users/${req.user.id}`);
+      }
     }
   })
 });
 
 // SHOW
-router.get("/users/:id", function(req, res) {
+router.get("/users/:id", middleware.isLoggedIn, function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     if (err) {
       console.log(err);
@@ -52,6 +56,13 @@ router.get("/users/:id", function(req, res) {
       res.render("users/show", {user: foundUser, todos: todos})
     })
   })
+});
+
+// EDIT
+router.get("/todos/:id/edit", middleware.checkTodoOwnership, function(req, res) {
+  Todo.findById(req.params.id, function(err, foundTodo) {
+    res.render("users/show", {todo: foundTodo});
+  });
 });
 
 module.exports = router;

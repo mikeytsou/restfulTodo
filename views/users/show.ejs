@@ -1,14 +1,26 @@
 <% include ../partials/header %>
 
+<div class="ui main text container">
+  <h1 class="ui huge header"><%= user.username %>'s Todo List</h1>
+
+  <form action="/todos" method="POST" class="ui form" id="todo-form">
+    <div class="field">
+      <label>Enter a Todo:</label>
+      <input type="text" name="post" placeholder="enter a todo..." id="todo-value">
+    </div>
+
+    <input type="submit" value="Create" class="ui black button">
+  </form>
+</div>
+
 <div class="ui main text container segment">
-
-    <h1 class="ui huge header"><%= user.username %></h1>
-
-    <a href="/todos/new">Add Todo</a>
-
+  <div class="ui container" id="todo-list">
     <% todos.forEach(function(todo) { %>
-      <div><%= todo.post %></div>
+      <div>
+        <%= todo.post %> - <%= moment(todo.createdAt).fromNow() %>
+      </div>
     <% }) %>
+  </div>
 </div>
 
 <% include ../partials/footer %>
