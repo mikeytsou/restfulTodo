@@ -9,11 +9,11 @@ router.get("/sessions", function(req, res) {
 
 // CREATE
 router.post("/sessions", passport.authenticate("local", {
-  successRedirect: "/",
   failureRedirect: "/sessions",
-  // successFlash: "Welcome to YelpCamp",
-  // failureFlash: true
-}), function(req, res) {});
+  failureFlash: true
+}), function(req, res) {
+  res.redirect(`/users/${req.user.id}`);
+});
 
 // LOGOUT
 router.get("/logout", function(req, res) {

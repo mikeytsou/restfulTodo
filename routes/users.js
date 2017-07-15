@@ -12,18 +12,18 @@ router.get("/users/new", function(req, res) {
 // CREATE
 router.post("/users", function(req, res) {
   const newUser = new User({
-    firstName: req.body.user.firstName,
-    lastName: req.body.user.lastName,
-    username: req.body.user.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    username: req.body.username,
   });
-  const password = req.body.user.password;
+  const password = req.body.password;
   User.register(newUser, password, function(err, user) {
     if (err) {
       console.log(err);
       return res.render("users/new");
     }
     passport.authenticate("local")(req, res, function() {
-      res.redirect("/");
+      res.redirect(`/users/${user.id}`);
     });
   });
 })
