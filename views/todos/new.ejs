@@ -1,8 +1,17 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
 
-<form action="/todos" method="POST">
-  <input type="text" name="todo[post]" placeholder="enter a thing todo">
-  <input type="submit">
-</form>
+<div class="ui main text container segment">
+  <h1 class="ui huge header">Enter a Todo</h1>
 
-<% include ./partials/footer %>
+  <form action="/todos" method="POST" class="ui form">
+    <div class="field">
+      <input type="text" name="todo[post]" placeholder="enter a thing todo">
+    </div>
+
+    <div class="field">
+      <input class="ui inverted green button" type="submit">
+    </div>
+  </form>
+</div>
+
+<% include ../partials/footer %>

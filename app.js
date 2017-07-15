@@ -2,8 +2,9 @@ const express = require("express");
       app = express();
       mongoose = require("mongoose");
       bodyParser = require("body-parser");
+      session = require("express-session");
       passport = require("passport");
-      localStrategy = require("passport-local");
+      LocalStrategy = require("passport-local");
       passportLocalMongoose = require("passport-local-mongoose");
       methodOverride = require("method-override");
       flash = require("connect-flash");
@@ -11,7 +12,7 @@ const express = require("express");
       indexRoutes = require("./routes/index");
       usersRoutes = require("./routes/users");
       sessionsRoutes = require("./routes/sessions");
-
+      todosRoutes = require("./routes/todos");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/restful_todo");
@@ -22,14 +23,14 @@ app.use(flash());
 app.set("view engine", "ejs");
 
 // PASSPORT CONFIG
-app.use(require("express-session")({
+app.use(session({
   secret: "THIS IS A SECRET",
   resave: false,
   saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -45,14 +46,14 @@ app.use(function(req, res, next) {
 app.use(indexRoutes);
 app.use(usersRoutes);
 app.use(sessionsRoutes);
-
+app.use(todosRoutes);
 
 // MISSING ROUTE
 app.get("*", function(req, res) {
   res.send("PAGE NOT FOUND");
-})
+});
 
 // SERVER
 app.listen(3000, function() {
   console.log("CONNECT TO PORT 3000");
-})
+});
