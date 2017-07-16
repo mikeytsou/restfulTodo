@@ -16,8 +16,12 @@
 <div class="ui main text container segment">
   <div class="ui container" id="todo-list">
     <% todos.forEach(function(todo) { %>
-      <div>
+      <div id="todo-container">
         <%= todo.post %> - <%= moment(todo.createdAt).fromNow() %>
+
+        <form action="/todos/<%= todo.id%>?_method=DELETE" method="POST" id="delete">
+          <input type="submit" value="Delete">
+        </form>
       </div>
     <% }) %>
   </div>

@@ -54,14 +54,29 @@ router.get("/users/:id", middleware.isLoggedIn, function(req, res) {
         res.redirect("/");
       }
       res.render("users/show", {user: foundUser, todos: todos})
-    })
-  })
+    });
+  });
 });
 
 // EDIT
-router.get("/todos/:id/edit", middleware.checkTodoOwnership, function(req, res) {
-  Todo.findById(req.params.id, function(err, foundTodo) {
-    res.render("users/show", {todo: foundTodo});
+// router.get("/todos/:id/edit", middleware.checkTodoOwnership, function(req, res) {
+//   Todo.findById(req.params.id, function(err, foundTodo) {
+//     res.render("users/show", {todo: foundTodo});
+//   });
+// });
+
+// DELETE
+router.delete("/todos/:id", middleware.isLoggedIn, function(req, res) {
+  Todo.findByIdAndRemove(req.params.id, function(err, todo) {
+    if (err) {
+      console.log(err)
+    } else {
+      if (req.xhr) {
+        res.json(todo);
+      } else {
+        res.redirect(`/users/${req.user.id}`);
+      }
+    }
   });
 });
 
