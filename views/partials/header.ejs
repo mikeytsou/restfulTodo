@@ -20,7 +20,7 @@
           <a href="/users/new" class="ui item">Register</a>
           <a href="/sessions" class="ui item">Log In</a>
         <% } else { -%>
-          <a href="" class="ui item"><%= currentUser.username %></a>
+          <a href="/users/<%= currentUser.id %>" class="ui item"><%= currentUser.username %></a>
           <a href="/logout" class="ui item">Log Out</a>
         <% } -%>
       </div>

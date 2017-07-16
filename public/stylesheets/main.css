@@ -2,7 +2,7 @@
   margin-top: 10vh;
 }
 
-#delete {
+.delete {
   display: inline;
   float: right;
 }

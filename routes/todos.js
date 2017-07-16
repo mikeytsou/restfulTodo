@@ -71,11 +71,8 @@ router.delete("/todos/:id", middleware.isLoggedIn, function(req, res) {
     if (err) {
       console.log(err)
     } else {
-      if (req.xhr) {
-        res.json(todo);
-      } else {
-        res.redirect(`/users/${req.user.id}`);
-      }
+      res.json(todo);
+      // res.redirect(`/users/${req.user.id}`);
     }
   });
 });
