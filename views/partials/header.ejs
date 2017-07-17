@@ -6,13 +6,16 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="/javascripts/script.js"></script>
   <title>RESTful Todo</title>
 </head>
 <body>
-  <div class="ui fixed inverted menu">
+  <nav class="ui fixed inverted menu">
     <div class="ui container">
-      <div class="header item">RESTful Todo</div>
+      <div class="header item">
+        <a href="/">RESTful Todo</a>
+      </div>
 
       <div class="right menu">
         <% if (!currentUser) { -%>
@@ -21,8 +24,23 @@
         <% } else { -%>
           <a href="/users/<%= currentUser.id %>" class="ui item"><%= currentUser.username %></a>
           <a href="/logout" class="ui item">Log Out</a>
-
         <% } -%>
       </div>
     </div>
+  </nav>
+
+  <div class="ui main text container" id="flash-message">
+    <% if (error && error.length > 0) { -%>
+      <div class="ui negative message mini">
+        <%= error %>
+      </div>
+    <% } -%>
+
+    <% if (success && success.length > 0) { -%>
+      <div class="ui success message mini">
+        <%= success %>
+      </div>
+    <% } -%>
   </div>
+
+  <div class="ui container stackable" id="main-container">

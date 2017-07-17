@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const todoSchema = new mongoose.Schema({
-  post: String,
-  completed: {type: Boolean, default: false},
+  post: {
+    type: String,
+    required: true
+  },
   createdAt: {type: Date, default: Date.now},
   author: {
     id: {

@@ -10,15 +10,9 @@ router.get("/todos", function(req, res) {
   res.render("todos/index");
 });
 
-// NEW
-router.get("/todos/new", function (req, res) {
-  console.log(req.user)
-  res.render("todos/new");
-});
-
 // CREATE
-router.post("/todos", function(req, res) {
-  const post = req.body.todo.post;
+router.post("/todos", middleware.isLoggedIn, function(req, res) {
+  const post = req.body.post;
   const author = {
     id: req.user._id,
     username: req.user.username
@@ -32,26 +26,41 @@ router.post("/todos", function(req, res) {
       console.log(err);
     } else {
       console.log(newTodos);
-      res.redirect(`/users/${req.user.id}`);
+      if (req.xhr) {
+        res.json(newTodos);
+      } else {
+        res.redirect(`/users/${req.user.id}`);
+      }
     }
   })
 });
 
 // SHOW
-router.get("/users/:id", function(req, res) {
+router.get("/users/:id", middleware.profilePrivacy, function(req, res) {
   User.findById(req.params.id, function(err, foundUser) {
     if (err) {
       console.log(err);
-      res.redirect("/");
+      res.redirect("/todos");
     }
     Todo.find().where('author.id').equals(foundUser._id).exec(function(err, todos) {
       if (err) {
         console.log(err);
-        res.redirect("/");
+        res.redirect("/todos");
       }
       res.render("users/show", {user: foundUser, todos: todos})
-    })
-  })
+    });
+  });
+});
+
+// DELETE
+router.delete("/todos/:id", middleware.isLoggedIn, function(req, res) {
+  Todo.findByIdAndRemove(req.params.id, function(err, todo) {
+    if (err) {
+      console.log(err)
+    } else {
+      res.json(todo);
+    }
+  });
 });
 
 module.exports = router;

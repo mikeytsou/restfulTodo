@@ -1,5 +1,6 @@
 const express = require("express");
       app = express();
+      dotenv = require("dotenv").config();
       mongoose = require("mongoose");
       bodyParser = require("body-parser");
       session = require("express-session");
@@ -16,6 +17,7 @@ const express = require("express");
 
 // APP CONFIG
 mongoose.connect("mongodb://localhost/restful_todo");
+app.locals.moment = require("moment");
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));

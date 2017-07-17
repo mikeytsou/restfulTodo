@@ -20,9 +20,11 @@ router.post("/users", function(req, res) {
   User.register(newUser, password, function(err, user) {
     if (err) {
       console.log(err);
-      return res.render("users/new");
+      // req.flash("error", err.message);
+      return res.render("users/new", {error: err.message});
     }
     passport.authenticate("local")(req, res, function() {
+      req.flash("success", `Hello ${user.firstName} ${user.lastName}!`)
       res.redirect(`/users/${user.id}`);
     });
   });
