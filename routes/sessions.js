@@ -19,7 +19,7 @@ router.post("/sessions", passport.authenticate("local", {
 // LOGOUT
 router.get("/logout", function(req, res) {
   req.logout();
-  req.flash("success", "Logged out");
+  // req.flash("success", "Logged out");
   res.redirect("/todos");
 })
 

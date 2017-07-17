@@ -6,7 +6,7 @@ const express = require("express");
 
 // NEW
 router.get("/users/new", function(req, res) {
-  res.render("users/new", {page: "users/new"});
+  res.render("users/new");
 });
 
 // CREATE

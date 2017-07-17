@@ -2,10 +2,10 @@ $(document).ready(function() {
 
   createPostListener();
   deletePostListener();
+  hideFlashMessage();
 
 });
 
-//
 const createPostListener = function() {
   $("#todo-form").on("submit", function(event) {
     event.preventDefault();
@@ -58,4 +58,8 @@ const deletePostListener = function() {
       console.log("error");
     });
   });
+}
+
+const hideFlashMessage = function() {
+  $("#flash-message").show().delay(5000).fadeOut();
 }

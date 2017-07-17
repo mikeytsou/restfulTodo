@@ -1,5 +1,51 @@
-<% include ../partials/header %>
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <title>RESTful Todo</title>
+</head>
+<body>
+  <nav class="ui fixed inverted menu">
+    <div class="ui container">
+      <div class="header item">
+        <a href="/">RESTful Todo</a>
+      </div>
 
-<h1 id="yoyoyo">HELLO</h1>
+      <div class="right menu">
+        <% if (!currentUser) { -%>
+          <a href="/users/new" class="ui item">Register</a>
+          <a href="/sessions" class="ui item">Log In</a>
+        <% } else { -%>
+          <a href="/users/<%= currentUser.id %>" class="ui item"><%= currentUser.username %></a>
+          <a href="/logout" class="ui item">Log Out</a>
+        <% } -%>
+      </div>
+    </div>
+  </nav>
 
-<% include ../partials/footer %>
+  <div class="ui main text container" id="flash-message">
+    <% if (error && error.length > 0) { -%>
+      <div class="ui negative message mini">
+        <%= error %>
+      </div>
+    <% } -%>
+
+    <% if (success && success.length > 0) { -%>
+      <div class="ui success message mini">
+        <%= success %>
+      </div>
+    <% } -%>
+  </div>
+
+  <ul class="slideshow">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+</body>
+</html>
