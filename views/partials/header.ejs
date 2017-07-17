@@ -11,9 +11,11 @@
   <title>RESTful Todo</title>
 </head>
 <body>
-  <div class="ui fixed inverted menu">
+  <nav class="ui fixed inverted menu">
     <div class="ui container">
-      <div class="header item">RESTful Todo</div>
+      <div class="header item">
+        <a href="/">RESTful Todo</a>
+      </div>
 
       <div class="right menu">
         <% if (!currentUser) { -%>
@@ -25,4 +27,20 @@
         <% } -%>
       </div>
     </div>
+  </nav>
+
+  <div class="ui main text container" id="flash-message">
+    <% if (error && error.length > 0) { -%>
+      <div class="ui negative message mini">
+        <%= error %>
+      </div>
+    <% } -%>
+
+    <% if (success && success.length > 0) { -%>
+      <div class="ui success message mini">
+        <%= success %>
+      </div>
+    <% } -%>
   </div>
+
+  <div class="ui container stackable" id="main-container">

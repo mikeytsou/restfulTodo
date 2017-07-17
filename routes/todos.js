@@ -11,10 +11,10 @@ router.get("/todos", function(req, res) {
 });
 
 // NEW
-router.get("/todos/new", middleware.isLoggedIn, function (req, res) {
-  console.log(req.user)
-  res.render("todos/new");
-});
+// router.get("/todos/new", middleware.isLoggedIn, function (req, res) {
+//   console.log(req.user)
+//   res.render("todos/new");
+// });
 
 // CREATE
 router.post("/todos", middleware.isLoggedIn, function(req, res) {
@@ -72,7 +72,6 @@ router.delete("/todos/:id", middleware.isLoggedIn, function(req, res) {
       console.log(err)
     } else {
       res.json(todo);
-      // res.redirect(`/users/${req.user.id}`);
     }
   });
 });
